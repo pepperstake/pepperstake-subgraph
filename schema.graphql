@@ -1,0 +1,6 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: BigInt!
+  pepperStake: Bytes! # address
+  _supervisors: [Bytes]! # address[]
+}

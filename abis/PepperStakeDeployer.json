@@ -1,0 +1,123 @@
+[
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_protocolFee", "type": "uint256" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "contract IPepperStake",
+        "name": "pepperStake",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "_supervisors",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_stakeAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "_unreturnedStakeBeneficiaries",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_returnWindowDays",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_maxParticipants",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_shouldParticipantsShareUnreturnedStake",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_shouldUseSupervisorInactionGuard",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "_metadataURI",
+        "type": "string"
+      }
+    ],
+    "name": "DeployPepperStake",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_supervisors",
+        "type": "address[]"
+      },
+      { "internalType": "uint256", "name": "_stakeAmount", "type": "uint256" },
+      {
+        "internalType": "address[]",
+        "name": "_unreturnedStakeBeneficiaries",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_returnWindowDays",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_maxParticipants",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "_shouldParticipantsShareUnreturnedStake",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "_shouldUseSupervisorInactionGuard",
+        "type": "bool"
+      },
+      { "internalType": "string", "name": "_metadataURI", "type": "string" }
+    ],
+    "name": "deployPepperStake",
+    "outputs": [
+      {
+        "internalType": "contract IPepperStake",
+        "name": "pepperStake",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "protocolFee",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
