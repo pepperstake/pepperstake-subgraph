@@ -17,7 +17,7 @@ export function handleDeployPepperStake(event: DeployPepperStake): void {
     PepperStake.create(event.params.pepperStake);
   }
   let pepperStakeContract = new PepperStakeContract(
-    event.transaction.hash.toHexString().toLowerCase()
+    event.params.pepperStake.toHexString()
   );
   if (pepperStakeContract) {
     pepperStakeContract.supervisors = changetype<Bytes[]>(

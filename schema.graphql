@@ -10,11 +10,17 @@ type PepperStakeContract @entity {
   shouldParticipantsShareUnreturnedStake: Boolean!
   shouldUseSupervisorInactionGuard: Boolean!
   metadataURI: String!
+
+  stakeEvents: [StakeEvent!]! @derivedFrom(field: "pepperStakeContract")
+  sponsorEvents: [SponsorEvent!]! @derivedFrom(field: "pepperStakeContract")
+  returnStakeEvents: [ReturnStakeEvent!]! @derivedFrom(field: "pepperStakeContract")
+  distributeUnreturnedStakeEvents: [DistributeUnreturnedStakeEvent!]! @derivedFrom(field: "pepperStakeContract")
+  distributeSponsorContributionEvents: [DistributeSponsorContributionEvent!]! @derivedFrom(field: "pepperStakeContract")
 }
 
 type StakeEvent @entity {
   id: ID!
-  # pepperStakeContract: PepperStakeContract!
+  pepperStakeContract: PepperStakeContract!
   timestamp: Int!
   txHash: Bytes!
 
@@ -24,7 +30,7 @@ type StakeEvent @entity {
 
 type SponsorEvent @entity {
   id: ID!
-  # pepperStakeContract: PepperStakeContract!
+  pepperStakeContract: PepperStakeContract!
   timestamp: Int!
   txHash: Bytes!
 
@@ -34,7 +40,7 @@ type SponsorEvent @entity {
 
 type ReturnStakeEvent @entity {
   id: ID!
-  # pepperStakeContract: PepperStakeContract!
+  pepperStakeContract: PepperStakeContract!
   timestamp: Int!
   txHash: Bytes!
 
@@ -45,7 +51,7 @@ type ReturnStakeEvent @entity {
 
 type DistributeUnreturnedStakeEvent @entity {
   id: ID!
-  # pepperStakeContract: PepperStakeContract!
+  pepperStakeContract: PepperStakeContract!
   timestamp: Int!
   txHash: Bytes!
 
@@ -57,7 +63,7 @@ type DistributeUnreturnedStakeEvent @entity {
 
 type DistributeSponsorContributionEvent @entity {
   id: ID!
-  # pepperStakeContract: PepperStakeContract!
+  pepperStakeContract: PepperStakeContract!
   timestamp: Int!
   txHash: Bytes!
 

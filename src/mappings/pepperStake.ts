@@ -1,7 +1,9 @@
+import { log } from "@graphprotocol/graph-ts";
 import { Bytes } from "@graphprotocol/graph-ts";
 import {
   DistributeSponsorContributionEvent,
   DistributeUnreturnedStakeEvent,
+  PepperStakeContract,
   ReturnStakeEvent,
   SponsorEvent,
   StakeEvent,
@@ -14,11 +16,20 @@ import {
   DistributeSponsorContribution,
 } from "../../generated/templates/PepperStake/PepperStake";
 
+function getPepperStakeContract(address: Bytes): string {
+  let pepperStakeContract = PepperStakeContract.load(address.toHexString());
+  if (!pepperStakeContract) {
+    log.error("PepperStakeContract not found: {}", [address.toHexString()]);
+  }
+  return pepperStakeContract!.id;
+}
+
 export function handleStake(event: Stake): void {
   let stakeEvent = new StakeEvent(
     event.transaction.hash.toHexString().toLowerCase()
   );
   if (stakeEvent) {
+    stakeEvent.pepperStakeContract = getPepperStakeContract(event.address);
     stakeEvent.timestamp = event.block.timestamp.toI32();
     stakeEvent.txHash = event.transaction.hash;
     stakeEvent.participant = event.params.participant;
@@ -32,6 +43,7 @@ export function handleSponsor(event: Sponsor): void {
     event.transaction.hash.toHexString().toLowerCase()
   );
   if (sponsorEvent) {
+    sponsorEvent.pepperStakeContract = getPepperStakeContract(event.address);
     sponsorEvent.timestamp = event.block.timestamp.toI32();
     sponsorEvent.txHash = event.transaction.hash;
     sponsorEvent.participant = event.params.participant;
@@ -45,6 +57,9 @@ export function handleReturnStake(event: ReturnStake): void {
     event.transaction.hash.toHexString().toLowerCase()
   );
   if (returnStakeEvent) {
+    returnStakeEvent.pepperStakeContract = getPepperStakeContract(
+      event.address
+    );
     returnStakeEvent.timestamp = event.block.timestamp.toI32();
     returnStakeEvent.txHash = event.transaction.hash;
     returnStakeEvent.supervisor = event.params.supervisor;
@@ -63,6 +78,9 @@ export function handleDistributeUnreturnedStake(
     event.transaction.hash.toHexString().toLowerCase()
   );
   if (distributeUnreturnedStakeEvent) {
+    distributeUnreturnedStakeEvent.pepperStakeContract = getPepperStakeContract(
+      event.address
+    );
     distributeUnreturnedStakeEvent.timestamp = event.block.timestamp.toI32();
     distributeUnreturnedStakeEvent.txHash = event.transaction.hash;
     distributeUnreturnedStakeEvent.caller = event.params.caller;
@@ -84,6 +102,9 @@ export function handleDistributeSponsorContribution(
     event.transaction.hash.toHexString().toLowerCase()
   );
   if (distributeSponsorContributionEvent) {
+    distributeSponsorContributionEvent.pepperStakeContract = getPepperStakeContract(
+      event.address
+    );
     distributeSponsorContributionEvent.timestamp = event.block.timestamp.toI32();
     distributeSponsorContributionEvent.txHash = event.transaction.hash;
     distributeSponsorContributionEvent.caller = event.params.caller;
