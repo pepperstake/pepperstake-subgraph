@@ -1,15 +1,15 @@
-specVersion: 0.0.4
+specVersion: 0.0.1
 schema:
   file: ./schema.graphql
 templates:
     - kind: ethereum
       name: PepperStake
-      network: goerli
+      network: {{network}}
       source:
         abi: PepperStake
       mapping:
         kind: ethereum/events
-        apiVersion: 0.0.6
+        apiVersion: 0.0.5
         language: wasm/assemblyscript
         file: ./src/mappings/pepperStake.ts
         entities:
@@ -31,14 +31,14 @@ templates:
 dataSources:
   - kind: ethereum/contract
     name: PepperStakeDeployer
-    network: goerli
+    network: {{network}}
     source:
-      address: '0xfd0366D100C87f319Bc58B199D527De232f527c2'
+      address: '{{address_pepperStakeDeployer}}'
       abi: PepperStakeDeployer
-      startBlock: 7893000
+      startBlock: {{startBlock_pepperStakeDeployer}}
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - DeployPepperStake

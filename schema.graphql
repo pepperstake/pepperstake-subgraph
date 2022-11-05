@@ -1,6 +1,50 @@
-type ExampleEntity @entity {
+type PepperStake @entity {
   id: ID!
-  count: BigInt!
-  pepperStake: Bytes! # address
-  _supervisors: [Bytes]! # address[]
+  creator: Bytes!
+  supervisors: [Bytes!]!
+  stakeAmount: BigInt!
+  unreturnedStakeBeneficiaries: [Bytes!]!
+  returnWindowDays: Int!
+  maxParticipants: Int!
+  shouldParticipantsShareUnreturnedStake: Boolean!
+  shouldUseSupervisorInactionGuard: Boolean!
+  metadataURI: String!
+}
+
+type StakeEvent @entity {
+  id: ID!
+  pepperStake: PepperStake!
+  timestamp: Int!
+  txHash: Bytes!
+
+  participantAddress: Bytes!
+  stakeAmount: BigInt!
+}
+
+type SponsorEvent @entity {
+  id: ID!
+  pepperStake: PepperStake!
+  timestamp: Int!
+  txHash: Bytes!
+
+  sponsorAddress: Bytes!
+  sponsorAmount: BigInt!
+}
+
+type ReturnStakeEvent @entity {
+  id: ID!
+  pepperStake: PepperStake!
+  timestamp: Int!
+  txHash: Bytes!
+
+  supervisorAddress: Bytes!
+  completingParticipants: [Bytes!]!
+}
+
+type PepperStakeDeployEvent @entity {
+  id: ID!
+  timestamp: Int!
+  txHash: Bytes!
+
+  pepperStakeContract: PepperStake!
 }

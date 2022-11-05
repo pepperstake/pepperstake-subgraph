@@ -2,6 +2,7 @@
   "name": "pepperstake-goerli-dev",
   "license": "UNLICENSED",
   "scripts": {
+    "prep": "node src/scripts/prepare.js",
     "codegen": "graph codegen",
     "build": "graph build",
     "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ pepperstake-goerli-dev",
@@ -10,7 +11,12 @@
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 pepperstake-goerli-dev"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.29.2",
-    "@graphprotocol/graph-ts": "0.26.0"
+    "@graphprotocol/graph-cli": "^0.33.0",
+    "@graphprotocol/graph-ts": "^0.27.0",
+    "mustache": "^4.0.1"
+  },
+  "devDependencies": {
+    "fs": "^0.0.1-security",
+    "js-yaml": "^4.1.0"
   }
 }

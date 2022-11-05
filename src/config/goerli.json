@@ -1,0 +1,5 @@
+{
+  "network": "goerli",
+  "address_pepperStakeDeployer": "0xfd0366D100C87f319Bc58B199D527De232f527c2",
+  "startBlock_pepperStakeDeployer": 7893000
+}
