@@ -1,11 +1,12 @@
-type PepperStake @entity {
+type PepperStakeContract @entity {
   id: ID!
+  address: Bytes!
   creator: Bytes!
-  supervisors: [Bytes!]!
+  # supervisors: [Bytes!]!
   stakeAmount: BigInt!
-  unreturnedStakeBeneficiaries: [Bytes!]!
-  returnWindowDays: Int!
-  maxParticipants: Int!
+  # unreturnedStakeBeneficiaries: [Bytes!]!
+  returnWindowDays: BigInt!
+  maxParticipants: BigInt!
   shouldParticipantsShareUnreturnedStake: Boolean!
   shouldUseSupervisorInactionGuard: Boolean!
   metadataURI: String!
@@ -13,7 +14,7 @@ type PepperStake @entity {
 
 type StakeEvent @entity {
   id: ID!
-  pepperStake: PepperStake!
+  # pepperStakeContract: PepperStakeContract!
   timestamp: Int!
   txHash: Bytes!
 
@@ -23,7 +24,7 @@ type StakeEvent @entity {
 
 type SponsorEvent @entity {
   id: ID!
-  pepperStake: PepperStake!
+  # pepperStakeContract: PepperStakeContract!
   timestamp: Int!
   txHash: Bytes!
 
@@ -33,18 +34,16 @@ type SponsorEvent @entity {
 
 type ReturnStakeEvent @entity {
   id: ID!
-  pepperStake: PepperStake!
+  # pepperStakeContract: PepperStakeContract!
   timestamp: Int!
   txHash: Bytes!
 
   supervisorAddress: Bytes!
-  completingParticipants: [Bytes!]!
+  # completingParticipants: [Bytes!]!
 }
 
-type PepperStakeDeployEvent @entity {
+type DeployPepperStakeEvent @entity {
   id: ID!
   timestamp: Int!
   txHash: Bytes!
-
-  pepperStakeContract: PepperStake!
 }

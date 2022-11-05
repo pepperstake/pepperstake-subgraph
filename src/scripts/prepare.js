@@ -141,6 +141,6 @@ writeContractAddresses();
 
 writeSubgraph();
 
-// checkHandlers();
+checkHandlers();
 
 graph.run("codegen");

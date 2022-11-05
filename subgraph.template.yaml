@@ -2,8 +2,8 @@ specVersion: 0.0.1
 schema:
   file: ./schema.graphql
 templates:
-    - kind: ethereum
-      name: PepperStake
+    - name: PepperStake
+      kind: ethereum/contract
       network: {{network}}
       source:
         abi: PepperStake
