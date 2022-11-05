@@ -97,7 +97,7 @@
       {
         "indexed": false,
         "internalType": "address[]",
-        "name": "sponsorContributionBeneficiaries",
+        "name": "beneficiaries",
         "type": "address[]"
       },
       {
@@ -128,7 +128,7 @@
       {
         "indexed": false,
         "internalType": "address[]",
-        "name": "unreturnedStakeBeneficiaries",
+        "name": "beneficiaries",
         "type": "address[]"
       },
       {
@@ -140,7 +140,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "sSharePerBeneficiary",
+        "name": "sharePerBeneficiary",
         "type": "uint256"
       }
     ],
@@ -153,7 +153,7 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "sponsor",
+        "name": "supervisor",
         "type": "address"
       },
       {
@@ -389,9 +389,14 @@
     "name": "participants",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        "internalType": "bool",
+        "name": "participated",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "completed",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",

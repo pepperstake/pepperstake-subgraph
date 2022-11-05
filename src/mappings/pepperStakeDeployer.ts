@@ -13,7 +13,6 @@ export function handleDeployPepperStake(event: DeployPepperStake): void {
   if (deployPepperStakeEvent) {
     deployPepperStakeEvent.timestamp = event.block.timestamp.toI32();
     deployPepperStakeEvent.txHash = event.transaction.hash;
-    deployPepperStakeEvent.save();
 
     PepperStake.create(event.params.pepperStake);
   }
@@ -21,6 +20,12 @@ export function handleDeployPepperStake(event: DeployPepperStake): void {
     event.transaction.hash.toHexString().toLowerCase()
   );
   if (pepperStakeContract) {
+    pepperStakeContract.supervisors = changetype<Bytes[]>(
+      event.params._supervisors
+    );
+    pepperStakeContract.unreturnedStakeBeneficiaries = changetype<Bytes[]>(
+      event.params._unreturnedStakeBeneficiaries
+    );
     pepperStakeContract.address = event.params.pepperStake;
     pepperStakeContract.creator = event.transaction.from;
     pepperStakeContract.stakeAmount = event.params._stakeAmount;
@@ -33,4 +38,6 @@ export function handleDeployPepperStake(event: DeployPepperStake): void {
     pepperStakeContract.metadataURI = event.params._metadataURI;
     pepperStakeContract.save();
   }
+  deployPepperStakeEvent.pepperStakeContract = pepperStakeContract.id;
+  deployPepperStakeEvent.save();
 }

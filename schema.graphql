@@ -2,9 +2,9 @@ type PepperStakeContract @entity {
   id: ID!
   address: Bytes!
   creator: Bytes!
-  # supervisors: [Bytes!]!
+  supervisors: [Bytes!]!
   stakeAmount: BigInt!
-  # unreturnedStakeBeneficiaries: [Bytes!]!
+  unreturnedStakeBeneficiaries: [Bytes!]!
   returnWindowDays: BigInt!
   maxParticipants: BigInt!
   shouldParticipantsShareUnreturnedStake: Boolean!
@@ -18,8 +18,8 @@ type StakeEvent @entity {
   timestamp: Int!
   txHash: Bytes!
 
-  participantAddress: Bytes!
-  stakeAmount: BigInt!
+  participant: Bytes!
+  amount: BigInt!
 }
 
 type SponsorEvent @entity {
@@ -28,8 +28,8 @@ type SponsorEvent @entity {
   timestamp: Int!
   txHash: Bytes!
 
-  sponsorAddress: Bytes!
-  sponsorAmount: BigInt!
+  participant: Bytes!
+  amount: BigInt!
 }
 
 type ReturnStakeEvent @entity {
@@ -38,12 +38,39 @@ type ReturnStakeEvent @entity {
   timestamp: Int!
   txHash: Bytes!
 
-  supervisorAddress: Bytes!
-  # completingParticipants: [Bytes!]!
+  supervisor: Bytes!
+  completingParticipants: [Bytes!]!
+  amount: BigInt!
+}
+
+type DistributeUnreturnedStakeEvent @entity {
+  id: ID!
+  # pepperStakeContract: PepperStakeContract!
+  timestamp: Int!
+  txHash: Bytes!
+
+  caller: Bytes!
+  beneficiaries: [Bytes!]!
+  totalUnreturnedStake: BigInt!
+  sharePerBeneficiary: BigInt!
+}
+
+type DistributeSponsorContributionEvent @entity {
+  id: ID!
+  # pepperStakeContract: PepperStakeContract!
+  timestamp: Int!
+  txHash: Bytes!
+
+  caller: Bytes!
+  beneficiaries: [Bytes!]!
+  totalSponsorContribution: BigInt!
+  sharePerBeneficiary: BigInt!
 }
 
 type DeployPepperStakeEvent @entity {
   id: ID!
   timestamp: Int!
   txHash: Bytes!
+
+  pepperStakeContract: PepperStakeContract!
 }

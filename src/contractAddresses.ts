@@ -1,3 +1,3 @@
-export const address_pepperStakeDeployer = "0xfd0366D100C87f319Bc58B199D527De232f527c2";
+export const address_pepperStakeDeployer = "0x2d328072a0892925d6b9cdb017724d4978c04792";
 
         

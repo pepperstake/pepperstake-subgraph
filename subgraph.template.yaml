@@ -17,6 +17,8 @@ templates:
           - StakeEvent
           - SponsorEvent
           - ReturnStakeEvent
+          - DistributeUnreturnedStakeEvent
+          - DistributeSponsorContributionEvent
         abis:
           - name: PepperStake
             file: ./src/abis/PepperStake.json
@@ -27,6 +29,10 @@ templates:
             handler: handleSponsor
           - event: ReturnStake(indexed address,address[],uint256)
             handler: handleReturnStake
+          - event: DistributeUnreturnedStake(indexed address,address[],uint256,uint256)
+            handler: handleDistributeUnreturnedStake
+          - event: DistributeSponsorContribution(indexed address,address[],uint256,uint256)
+            handler: handleDistributeSponsorContribution
 
 dataSources:
   - kind: ethereum/contract
@@ -41,7 +47,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - DeployPepperStake
+        - DeployPepperStakeEvent
       abis:
         - name: PepperStakeDeployer
           file: ./src/abis/PepperStakeDeployer.json
