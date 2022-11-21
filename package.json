@@ -2,6 +2,7 @@
   "name": "pepperstake-goerli-dev",
   "license": "UNLICENSED",
   "scripts": {
+    "abis": "node src/scripts/getAbis.js",
     "prep": "node src/scripts/prepare.js",
     "codegen": "graph codegen",
     "build": "graph build",
