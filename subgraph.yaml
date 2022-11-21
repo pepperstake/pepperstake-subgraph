@@ -31,12 +31,14 @@ templates:
             handler: handleApproveForParticipants
           - event: ReturnStake(indexed address,uint256,uint256,uint256)
             handler: handleReturnStake
-          - event: DistributeUnreturnedStake(indexed address,address[],uint256,uint256)
-            handler: handleDistributeUnreturnedStake
           - event: DistributeSponsorContribution(indexed address,address[],uint256,uint256)
             handler: handleDistributeSponsorContribution
           - event: DistributeFees(indexed address,uint256,address,uint256,address,uint256,address[],uint256)
             handler: handleDistributeFees
+          - event: DistributeUnreturnedStake(indexed address,address[],uint256,uint256)
+            handler: handleDistributeUnreturnedStake
+          - event: PostCompletionWindowDistribution(indexed address)
+            handler: handlePostCompletionWindowDistribution
 
 dataSources:
   - kind: ethereum/contract
@@ -58,5 +60,4 @@ dataSources:
       eventHandlers:
         - event: DeployPepperStake(indexed address,uint256,(address[],address[],address[],address[],uint256[],uint256,uint256,bool,bool,bool,uint256,address,uint256,string),uint256,address)
           handler: handleDeployPepperStake
-          receipt: true
       file: ./src/mappings/pepperStakeDeployer.ts

@@ -2,13 +2,26 @@ type PepperStakeContract @entity {
   id: ID!
   address: Bytes!
   creator: Bytes!
+  projectId: Int!
+
   supervisors: [Bytes!]!
-  stakeAmount: BigInt!
+  participantAllowList: [Bytes!]!
   unreturnedStakeBeneficiaries: [Bytes!]!
-  returnWindowDays: BigInt!
+  oracleDelegateAddresses: [Bytes!]!
+  stakingTiers: [BigInt!]!
+
+  completionWindowSeconds: BigInt!
   maxParticipants: BigInt!
+  shouldUseParticipantAllowList: Boolean!
   shouldParticipantsShareUnreturnedStake: Boolean!
   shouldUseSupervisorInactionGuard: Boolean!
+
+  creatorFeePercentage: BigDecimal!
+  creatorFeeBeneficiary: Bytes!
+  supervisorTipPercentage: BigDecimal!
+  protocolFeePercentage: BigDecimal!
+  protocolFeeBeneficiary: Bytes!
+
   metadataURI: String!
 
   stakeEvents: [StakeEvent!]! @derivedFrom(field: "pepperStakeContract")
@@ -24,7 +37,7 @@ type PepperStakeContract @entity {
 type StakeEvent @entity(immutable: true) {
   id: Bytes!
   pepperStakeContract: PepperStakeContract!
-  timestamp: Int!
+  timestamp: BigInt!
   txHash: Bytes!
 
   participant: Bytes!
@@ -34,7 +47,7 @@ type StakeEvent @entity(immutable: true) {
 type SponsorEvent @entity(immutable: true) {
   id: Bytes!
   pepperStakeContract: PepperStakeContract!
-  timestamp: Int!
+  timestamp: BigInt!
   txHash: Bytes!
 
   sponsor: Bytes!
@@ -44,7 +57,7 @@ type SponsorEvent @entity(immutable: true) {
 type ApproveForParticipantsEvent @entity(immutable: true) {
   id: Bytes!
   pepperStakeContract: PepperStakeContract!
-  timestamp: Int!
+  timestamp: BigInt!
   txHash: Bytes!
 
   supervisor: Bytes!
@@ -54,7 +67,7 @@ type ApproveForParticipantsEvent @entity(immutable: true) {
 type ReturnStakeEvent @entity(immutable: true) {
   id: Bytes!
   pepperStakeContract: PepperStakeContract!
-  timestamp: Int!
+  timestamp: BigInt!
   txHash: Bytes!
 
   participant: Bytes!
@@ -66,7 +79,7 @@ type ReturnStakeEvent @entity(immutable: true) {
 type DistributeSponsorContributionEvent @entity(immutable: true) {
   id: Bytes!
   pepperStakeContract: PepperStakeContract!
-  timestamp: Int!
+  timestamp: BigInt!
   txHash: Bytes!
 
   caller: Bytes!
@@ -78,7 +91,7 @@ type DistributeSponsorContributionEvent @entity(immutable: true) {
 type DistributeFeesEvent @entity(immutable: true) {
   id: Bytes!
   pepperStakeContract: PepperStakeContract!
-  timestamp: Int!
+  timestamp: BigInt!
   txHash: Bytes!
 
   caller: Bytes!
@@ -94,7 +107,7 @@ type DistributeFeesEvent @entity(immutable: true) {
 type DistributeUnreturnedStakeEvent @entity(immutable: true) {
   id: Bytes!
   pepperStakeContract: PepperStakeContract!
-  timestamp: Int!
+  timestamp: BigInt!
   txHash: Bytes!
 
   caller: Bytes!
@@ -106,7 +119,7 @@ type DistributeUnreturnedStakeEvent @entity(immutable: true) {
 type PostCompletionWindowDistributionEvent @entity(immutable: true) {
   id: Bytes!
   pepperStakeContract: PepperStakeContract!
-  timestamp: Int!
+  timestamp: BigInt!
   txHash: Bytes!
 
   caller: Bytes!
@@ -114,7 +127,7 @@ type PostCompletionWindowDistributionEvent @entity(immutable: true) {
 
 type DeployPepperStakeEvent @entity(immutable: true) {
   id: Bytes!
-  timestamp: Int!
+  timestamp: BigInt!
   txHash: Bytes!
 
   pepperStakeContract: PepperStakeContract!
